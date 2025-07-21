@@ -17,6 +17,8 @@
 # include <stdlib.h>
 # include <limits.h>
 
+# define deg_to_rad(deg) deg * (M_PI/180)
+
 typedef struct s_list
 {
 	void			*content;
