@@ -6,7 +6,7 @@
 /*   By: anpollan <anpollan@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 16:44:58 by anpollan          #+#    #+#             */
-/*   Updated: 2025/07/19 17:44:04 by anpollan         ###   ########.fr       */
+/*   Updated: 2025/07/24 14:27:34 by anpollan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <limits.h>
-
-# define deg_to_rad(deg) deg * (M_PI/180)
+# include <stdbool.h>
 
 typedef struct s_list
 {
@@ -71,5 +70,6 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 int		ft_printf(const char *format, ...);
 char	*get_next_line(int fd);
 int		*ft_atoi_safe(const char *nptr);
+int		*ft_atoi_hexadecimal_safe(const char *nptr);
 
 #endif
