@@ -11,7 +11,11 @@
 # **************************************************************************** #
 
 NAME		= libft.a
-SRCS		= ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c \
+SRC_DIR		= ./src/
+INCL_DIR	= ./incl/
+OBJ_DIR		= ./obj/
+HEADER		= ./incl/libft.h
+SRC			= ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c \
 			  ft_strlen.c ft_memset.c ft_bzero.c ft_memcpy.c ft_memmove.c \
 			  ft_strlcpy.c ft_strlcat.c ft_toupper.c ft_tolower.c ft_strchr.c \
 			  ft_strrchr.c ft_strncmp.c ft_memchr.c ft_memcmp.c ft_strnstr.c \
@@ -27,22 +31,23 @@ SRCS		= ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c \
 			  ft_lstnew_bonus.c ft_lstadd_front_bonus.c ft_lstsize_bonus.c \
 			  ft_lstlast_bonus.c ft_lstadd_back_bonus.c ft_lstdelone_bonus.c \
 			  ft_lstclear_bonus.c ft_lstiter_bonus.c ft_lstmap_bonus.c
-OBJS		= $(SRCS:%.c=%.o)
+OBJ			= $(addprefix $(OBJ_DIR), $(SRC:%.c=%.o))
 CC			= cc
-C_FLAGS		= -Wall -Wextra -Werror -c -g -I.
+C_FLAGS		= -Wall -Wextra -Werror -c -g -I$(INCL_DIR)
 AR			= ar
 AR_FLAGS	= -rcs
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
-	$(AR) $(AR_FLAGS) $(NAME) $(OBJS)
+$(NAME): $(OBJ)
+	$(AR) $(AR_FLAGS) $(NAME) $(OBJ)
 
-%.o: %.c libft.h
+$(OBJ_DIR)%.o: $(SRC_DIR)%.c $(HEADER)
+	@mkdir -p $(dir $@)
 	$(CC) $(C_FLAGS) $< -o $@
 
 clean:
-	rm -rf $(OBJS)
+	rm -rf $(OBJ_DIR)
 	
 fclean:	clean
 	rm -rf $(NAME) compile_commands.json
@@ -50,3 +55,5 @@ fclean:	clean
 re: fclean all
 
 .PHONY: all clean fclean re
+
+.SECONDARY: $(OBJ) $(OBJ_DIR)
