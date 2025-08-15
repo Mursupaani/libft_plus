@@ -100,5 +100,7 @@ t_arena	*arena_init(size_t	capacity);
 void	*arena_alloc(t_arena *arena, size_t size);
 void	arena_reset(t_arena *arena);
 void	arena_free(t_arena **arena);
+int		*ft_atoi_safe(const char *nptr);
+int		*ft_atoi_hexadecimal_safe(const char *nptr);
 
 #endif

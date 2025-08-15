@@ -55,6 +55,16 @@ static char	*nptr_to_lower(const char *nptr, char *nbr_str, int nptrlen)
 	i = 0;
 	while (i < nptrlen)
 	{
+		if (nptr[i] == '\n')
+		{
+			nbr_str[i] = '\0';
+			break ;
+		}
+		i++;
+	}
+	i = 0;
+	while (nbr_str[i])
+	{
 		nbr_str[i] = ft_tolower(nbr_str[i]);
 		i++;
 	}

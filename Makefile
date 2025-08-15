@@ -23,12 +23,11 @@ SRCS		= ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c \
 			  ft_print_percentage.c ft_print_pointer.c ft_print_string.c \
 			  ft_print_unsigned_decimal.c ft_print_uppercase_hex.c \
 			  get_next_line_bonus.c get_next_line_utils_bonus.c \
-			  ft_atoi_hexadecimal.c ft_atoi_safe.c memory_arena.c
-OBJS		= $(SRCS:%.c=%.o)
-BONUS		= ft_lstnew_bonus.c ft_lstadd_front_bonus.c ft_lstsize_bonus.c \
+			  ft_atoi_hexadecimal.c ft_atoi_safe.c memory_arena.c \
+			  ft_lstnew_bonus.c ft_lstadd_front_bonus.c ft_lstsize_bonus.c \
 			  ft_lstlast_bonus.c ft_lstadd_back_bonus.c ft_lstdelone_bonus.c \
 			  ft_lstclear_bonus.c ft_lstiter_bonus.c ft_lstmap_bonus.c
-BONUS_OBJS	= $(BONUS:%.c=%.o)
+OBJS		= $(SRCS:%.c=%.o)
 CC			= cc
 C_FLAGS		= -Wall -Wextra -Werror -c -g -I.
 AR			= ar
@@ -42,18 +41,12 @@ $(NAME): $(OBJS)
 %.o: %.c libft.h
 	$(CC) $(C_FLAGS) $< -o $@
 
-bonus: .bonus
-
-.bonus: $(NAME) $(BONUS_OBJS)
-	$(AR) $(AR_FLAGS) $(NAME) $(BONUS_OBJS)
-	touch .bonus
-
 clean:
-	rm -rf $(OBJS) $(BONUS_OBJS)
+	rm -rf $(OBJS)
 	
 fclean:	clean
-	rm -rf $(NAME) .bonus compile_commands.json
+	rm -rf $(NAME) compile_commands.json
 
 re: fclean all
 
-.PHONY: all bonus clean fclean re
+.PHONY: all clean fclean re
