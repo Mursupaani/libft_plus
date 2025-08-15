@@ -71,6 +71,7 @@ int		ft_atoi(const char *nptr);
 int		*ft_atoi_safe(const char *nptr);
 int		*ft_atoi_hexadecimal_safe(const char *nptr);
 char	*ft_itoa(int n);
+int		ft_itoa_to_buf(int n, char *dest, size_t buf_size);
 
 // Linked lists
 t_list	*ft_lstnew(void *content);
