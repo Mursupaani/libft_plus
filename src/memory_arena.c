@@ -39,8 +39,12 @@ void	*arena_alloc(t_arena *arena, size_t size)
 		return (NULL);
 	if (arena->size + size > arena->capacity)
 	{
-		// FIXME: Alloc another arena!
-		return (NULL);
+		while (arena->next)
+			arena = arena->next;
+		arena->next = arena_init(arena->capacity);
+		if (!arena->next)
+			return (NULL);
+		arena = arena->next;
 	}
 	ptr = (void *)arena->data + arena->size;
 	arena->size += size;
@@ -49,8 +53,12 @@ void	*arena_alloc(t_arena *arena, size_t size)
 
 void	arena_reset(t_arena *arena)
 {
+	t_arena	*temp;
+
 	if (!arena)
 		return ;
+	temp = arena->next;
+	arena_free(&temp);
 	ft_memset(arena, 0, arena->capacity);
 }
 
