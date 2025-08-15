@@ -35,7 +35,7 @@ void	*arena_alloc(t_arena *arena, size_t size)
 {
 	void	*ptr;
 
-	if (!arena || !size)
+	if (!arena || !size || size > arena->capacity)
 		return (NULL);
 	if (arena->size + size > arena->capacity)
 	{
@@ -53,13 +53,12 @@ void	*arena_alloc(t_arena *arena, size_t size)
 
 void	arena_reset(t_arena *arena)
 {
-	t_arena	*temp;
-
 	if (!arena)
 		return ;
-	temp = arena->next;
-	arena_free(&temp);
-	ft_memset(arena, 0, arena->capacity);
+	if (arena->next)
+		arena_free(&arena->next);
+	ft_memset(arena->data, 0, arena->capacity);
+	arena->size = 0;
 }
 
 void	arena_free(t_arena **arena)
